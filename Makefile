@@ -43,4 +43,4 @@ setup:
 	$(PYTHON) $(MANAGE) createsuperuser
 
 deploy:
-	$(PYTHON) $(MANAGE) runserver 0.0.0.0:6767
+	$(PYTHON) $(MANAGE) runserver 0.0.0.0:1525
