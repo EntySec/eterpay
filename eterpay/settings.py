@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-v1$hr9#o9ip&8#0id=s9-m49ui)+!3o3(%4xv@amjssxq)46v&
 DEBUG = True
 TEST = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
