@@ -120,17 +120,18 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
         if len(utxo) > 0:
             last_utxo = utxo[-1]
+            invoice_amount = currency_to_satoshi_cached(invoice.amount, 'btc')
 
-            if utxo.amount < currency_to_satoshi_cached(invoice.amount, 'btc'):
+            if last_utxo.amount < invoice_amount:
                 return Response(
                     {
-                        'error': f'Amount is less ({str(utxo.amount)} < {str(invoice.amount)})'
+                        'error': f'Payed amount is less ({str(last_utxo.amount)} < {str(invoice_amount)})'
                     }, status=400)
 
             if last_utxo.confirmations < settings.BTC_CONFIRMATIONS:
                 return Response(
                     {
-                        'error': f'Not enough confirmations ({str(last_utxo.confirmations)} < {settings.BTC_CONFIRMATIONS})'
+                        'error': f'Payment is not confirmed yet ({str(last_utxo.confirmations)} < {settings.BTC_CONFIRMATIONS})'
                     }, status=400)
 
             return Response()
